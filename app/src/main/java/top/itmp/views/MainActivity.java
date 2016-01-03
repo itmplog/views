@@ -1,5 +1,6 @@
 package top.itmp.views;
 
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -138,7 +139,30 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 1:
+                case 2:
+                case 3:
+                return PlaceholderFragment.newInstance(position + 1);
+                default:
+                    return new Fragment(){
+                        @Override
+                        public void onCreate(Bundle savedInstanceState) {
+                            super.onCreate(savedInstanceState);
+                        }
+
+                        @Nullable
+                        @Override
+                        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+                            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+
+                            return rootView;
+                            //return super.onCreateView(inflater, container, savedInstanceState);
+                        }
+                    };
+
+            }
         }
 
         @Override
@@ -151,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "URL";
                 case 1:
                     return "SECTION 2";
                 case 2:
